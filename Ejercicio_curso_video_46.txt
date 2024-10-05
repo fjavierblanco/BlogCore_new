@@ -1,0 +1,115 @@
+Esta solución muestra cómo crear una clase para representar objetos (`Producto`), cómo definir una interfaz para especificar operaciones relacionadas con esos objetos (`IProductoRepository`), y cómo implementar un repositorio que utiliza una lista en memoria para administrar los objetos (`ProductoRepository`). Esto es una parte fundamental del desarrollo de software en C# y .NET, donde se abstrae el acceso a datos y se separa la lógica de negocio de la lógica de almacenamiento.
+
+Explicación paso a paso
+
+
+
+1. Crear una Clase Producto:
+
+- Empezamos creando una clase llamada `Producto`. Esta clase representa un producto con tres propiedades: `ProductoId` (un identificador único), `Nombre` y `Precio`. Un producto tiene un identificador, un nombre y un precio.
+
+
+
+2. Interfaz de Repositorio:
+
+- Luego, creamos una interfaz llamada `IProductoRepository`. Esta interfaz define métodos que un repositorio de productos debe implementar. Un repositorio es como una base de datos virtual que nos permite agregar y recuperar productos.
+
+
+
+3. Implementación del Repositorio:
+
+- Después, implementamos una clase llamada `ProductoRepository` que implementa la interfaz `IProductoRepository`. Esta clase utiliza una lista en memoria para almacenar los productos en lugar de una base de datos real. Los métodos de esta clase nos permiten agregar productos, obtener productos por su identificador y obtener todos los productos.
+
+
+
+4. Uso del Repositorio:
+
+- En el proyecto principal, puedes utilizar el repositorio para agregar productos, recuperar productos por su identificador y obtener una lista de todos los productos. Esto te permite gestionar una colección de productos en memoria como si estuvieras trabajando con una base de datos.
+
+Código Terminado:
+
+//1. Crear una Clase Producto:
+
+using System.Collections.Generic;
+
+
+
+namespace Coding.Exercise
+
+{
+
+    public class Producto
+
+    {
+
+        public int ProductoId { get; set; }
+
+        public string Nombre { get; set; }
+
+        public decimal Precio { get; set; }
+
+    }
+
+//Escribe aquí la interfaz con los métodos para realizar solamente 3 operaciones para el modelo producto:
+
+//Interfaz de Repositorio:
+
+    public interface IProductoRepository
+
+    {
+
+        Producto AgregarProducto(Producto producto);
+
+        Producto ObtenerProductoPorId(int productoId);
+
+        List<Producto> ObtenerTodosLosProductos();
+
+    }
+
+//3. Implementación del Repositorio:
+
+    public class ProductoRepository : IProductoRepository
+
+    {
+
+        private readonly List<Producto> _productos = new List<Producto>();
+
+        private int _productoIdCounter = 1;
+
+
+
+        public Producto AgregarProducto(Producto producto)
+
+        {
+
+            producto.ProductoId = _productoIdCounter++;
+
+            _productos.Add(producto);
+
+            return producto;
+
+        }
+
+
+
+        public Producto ObtenerProductoPorId(int productoId)
+
+        {
+
+            return _productos.Find(p => p.ProductoId == productoId);
+
+        }
+
+
+
+        public List<Producto> ObtenerTodosLosProductos()
+
+        {
+
+            return _productos;
+
+        }
+
+    }
+
+}
