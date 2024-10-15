@@ -18,7 +18,7 @@ builder.Services.AddControllersWithViews();
 
 //Agregar contenedor de trabajo al contenedor de inyeccion de dependencias
 //
-builder.Services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
+builder.Services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>(); 
 
 var app = builder.Build();
 

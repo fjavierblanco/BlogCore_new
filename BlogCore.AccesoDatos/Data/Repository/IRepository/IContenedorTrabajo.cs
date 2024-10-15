@@ -11,7 +11,8 @@ namespace BlogCore.AccesoDatos.Data.Repository.IRepository
         // Aquí se deben ir agregando los diferentes repositorios o metodos
 
         ICategoriaRepository Categoria { get; }//Llamamos  repositorio para que se pueda leer
-                
+        IArticuloRepository Articulo { get; }//Llamamos  repositorio para que se pueda leer
+
         void Save();
 
 
